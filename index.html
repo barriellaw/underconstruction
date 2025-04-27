@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Under Construction</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      animation: fadeIn 2s ease-in-out;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    #countdown {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      color: #ff6600;
+      font-weight: bold;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .gear {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      color: #ff6600;
+      animation: rotateGear 3s linear infinite;
+    }
+    @keyframes rotateGear {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="gear">⚙️</div>
+    <h1>Under Construction</h1>
+    <p>We're working hard to bring you a new and improved website.<br>Please check back soon!</p>
+    <div id="countdown">Loading...</div>
+  </div>
+
+  <script>
+    // Set the countdown start and duration (30 days)
+    const now = new Date().getTime();
+    const countdownDuration = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
+    const targetTime = now + countdownDuration;
+
+    function updateCountdown() {
+      const currentTime = new Date().getTime();
+      const distance = targetTime - currentTime;
+
+      if (distance < 0) {
+        document.getElementById('countdown').innerHTML = "We're live!";
+        clearInterval(timerInterval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown').innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s remaining";
+    }
+
+    // Update countdown every second
+    const timerInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
